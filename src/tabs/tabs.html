@@ -1,0 +1,11 @@
+<h2 class="session-title">Form of Art: {{tabs.session.title}}</h2>
+
+<ul class="nav nav-tabs">
+    <li ng-repeat="(step, id) in tabs.steps track by step" ui-sref="step({step: step})" ui-sref-active="active" class="active">
+        <a href="">step {{ step }}</a>
+    </li>
+</ul>
+
+<div class="demo-container">
+    <ui-view></ui-view>
+</div>

@@ -1,0 +1,51 @@
+<form name="demo.myForm" novalidate class="form-group">
+
+    <div class="form-group">
+        <label for="email">Please enter your email</label>
+        <input required type="email" ng-model="demo.email" id="email" class="form-control">
+    </div>
+
+    <button ng-click="demo.myForm.$valid && demo.submit()" class="btn btn-success">Submit</button>
+
+</form>
+
+<hr>
+
+<p>input: {{ demo.email }}</p>
+
+
+<!-- Notes -->
+
+<hr>
+
+<p>
+    We fix the validation issues by adding:
+</p>
+
+<ul>
+    <li>'novalidate' attribute on the form - prevents browser's validation</li>
+    <li>a name to the form: <code>demo.myForm</code> - gives us access to the form object</li>
+    <li>a condition on the submit action: <code>demo.myForm.$valid && demo.submit()</code> -
+        so submitting will be allowed only when the form is valid</li>
+</ul>
+
+<p>
+    We could give the form a name without the controller's prefix, but then it would be binded to the $scope.
+    Giving it the controller's alias prefix binds the form to the controller,
+    so we can easily use it in controller functions.
+</p>
+
+<p>
+    Here are some of the form's attributes.
+    The form also has functions for setting the values of the attributes, for instance <code>$setPristine()</code>
+</p>
+
+<ul>
+    <li>demo.myForm.$valid: <b>{{ demo.myForm.$valid }}</b></li>
+    <li>demo.myForm.$invalid: <b>{{ demo.myForm.$invalid }}</b></li>
+    <li>demo.myForm.$submitted: <b>{{ demo.myForm.$submitted }}</b></li>
+    <li>demo.myForm.$dirty: <b>{{ demo.myForm.$dirty }}</b></li>
+    <li>demo.myForm.$error (notice: this is an object, when there's no error it is empty):
+        <b>{{ demo.myForm.$error }}</b></li>
+</ul>
+

@@ -1,0 +1,53 @@
+<form ng-submit="demo.myForm.$valid && demo.submit()"
+      name="demo.myForm"
+      ng-model-options="{updateOn: 'default blur', debounce: {'default': 1000, 'blur': 0}}"
+      novalidate
+      class="form-group">
+
+    <div class="form-group">
+        <label for="email">Please enter your email</label>
+        <input name="email"
+               required type="email"
+               ng-model="demo.email"
+               id="email"
+               class="form-control">
+    </div>
+
+    <button class="btn btn-success">Submit</button>
+
+</form>
+
+<label>Errors:</label>
+
+<div ng-messages="demo.myForm.$dirty && demo.myForm.$error">
+    <div ng-messages-include="basicForm/errorMessages.html"></div>
+</div>
+
+<hr>
+
+<p>input: {{ demo.email }}</p>
+
+
+<!-- Notes -->
+
+<hr>
+
+<p>
+    An important good practice we haven't mentioned yet is naming the controls (input elements).
+    We got by with this since we have only one input in our form. By naming each control we can:
+</p>
+
+<ul>
+    <li>validate each input independently</li>
+    <li>get the state of each control, for instance <code>$dirty, $isEmpty</code></li>
+    <li>call functions on the control, for instance <code>$setUntouched(), $rollbackViewValue()</code></li>
+</ul>
+
+<p>
+    For example, check out the email control $error object:
+</p>
+<p>
+    demo.myForm.email.$error: <b>{{ demo.myForm.email.$error }}</b>
+</p>
+
+

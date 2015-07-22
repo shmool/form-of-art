@@ -1,0 +1,57 @@
+<form ng-submit="demo.myForm.$valid && demo.submit()"
+      name="demo.myForm"
+      ng-model-options="{updateOn: 'default blur', debounce: {'default': 1000, 'blur': 0}}"
+      novalidate
+      class="form-group">
+
+    <div class="form-group">
+        <label for="email">Please enter your email</label>
+        <input required type="email" ng-model="demo.email" id="email" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <input id="spam-lazy" type="checkbox" ng-model="sendSpam">
+        <label for="spam-lazy">Send lazy spam</label>
+    </div>
+
+    <div class="form-group">
+    <input id="spam-now" type="checkbox" ng-model="sendSpam" ng-model-options="{updateOn: 'default'}">
+        <label for="spam-now">Send spam now</label>
+    </div>
+
+    <p ng-show="sendSpam">Spam will be sent.</p>
+
+    <button class="btn btn-success">Submit</button>
+
+</form>
+
+<label>Errors:</label>
+
+<div ng-messages="demo.myForm.$dirty && demo.myForm.$error">
+    <div ng-messages-include="basicForm/errorMessages.html"></div>
+</div>
+
+<hr>
+
+
+<p>input: {{ demo.email }}</p>
+
+
+<!-- Notes -->
+
+<hr>
+
+<p>
+    To further demonstrate the use of ngModelOptions, we add two checkboxes.
+</p>
+
+<ul>
+    <li>Both checkboxes toggle the value of 'sendSpam',
+        which is used as the value of ngShow for the "Spam will be sent" paragraph. </li>
+    <li>The First checkbox, labeled "Send lazy spam" does not contain any additional attributes.</li>
+    <li>The second checkbox, labeled "Send spam now" has the attribute
+    <code>ng-model-options="{updateOn: 'default'}"</code>.
+        This overrides the form's ngModelOptions and updates the model immediately on change.</li>
+</ul>
+
+

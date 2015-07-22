@@ -1,0 +1,53 @@
+<form name="demo.myForm" novalidate class="form-group">
+
+    <div class="form-group">
+        <label for="email">Please enter your email</label>
+        <input required type="email" ng-model="demo.email" id="email" class="form-control">
+    </div>
+
+    <button ng-click="demo.myForm.$valid && demo.submit()" class="btn btn-success">Submit</button>
+
+</form>
+
+<label>Errors:</label>
+
+<div ng-messages="demo.myForm.$error">
+    <div ng-messages-include="basicForm/errorMessages.html"></div>
+</div>
+
+<hr>
+
+<p>input: {{ demo.email }}</p>
+
+
+<!-- Notes -->
+
+<hr>
+
+<p>
+    We add error messages using ngMessages.
+</p>
+
+<ul>
+    <li>ngMessages is not a part of the ng module. You must add this module explicitly
+        (<code>npm install angular-messages</code> and add it as a dependancy to your module).</li>
+    <li>ngMessages receives as an attribute the relevant $error object.
+        (Here we pass the form's $error object, but you can pass the input's $error object
+        to show the errors of the specific input.)</li>
+    <li>ngMessage, nested within ngMessages, holds the error message for the specific type(s) of error.</li>
+    <li>We use ngMessagesInclude (also nested within ngMessage)
+        which allows us to hold our error messages in a separate file and reuse it.</li>
+    <li>A little more about ngMessages in <a ui-sref="step({step: 10})">step 10</a></li>
+</ul>
+
+<p>ngMessages docs:
+    <a href="https://docs.angularjs.org/api/ngMessages">https://docs.angularjs.org/api/ngMessages</a>
+</p>
+
+<p>
+    <b>Notice</b> that the error messages appear when the form is loaded and as the user types.
+    This is not very user-friendly. We must decide when the error messages should and should not appear.
+    Also, this means we have a digest cycle on every change in the form.
+    We would like to eliminate unnecessary digest cycles.
+</p>
+

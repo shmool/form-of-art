@@ -1,0 +1,66 @@
+<form name="demo.myForm"
+      ng-model-options="{updateOn: 'default blur', debounce: {'default': 1000, 'blur': 0}}"
+      novalidate
+      class="form-group">
+
+    <div class="form-group">
+        <label for="email">Please enter your email</label>
+        <input required type="email" ng-model="demo.email" id="email" class="form-control">
+    </div>
+
+    <button ng-click="demo.myForm.$valid && demo.submit()" class="btn btn-success">Submit</button>
+
+</form>
+
+<label>Errors:</label>
+
+<div ng-messages="demo.myForm.$dirty && demo.myForm.$error">
+    <div ng-messages-include="basicForm/errorMessages.html"></div>
+</div>
+
+<hr>
+
+<p>input: {{ demo.email }}</p>
+
+
+<!-- Notes -->
+
+<hr>
+
+<p>
+    To reduce digest cycles we use ngModelOptions, which is a directive that defines how the model updates are done.
+</p>
+
+<ul>
+    <li>ngModelOptions receives an object which defines when the model should be updated.</li>
+    <li>'updateOn' defines the triggers (events) for updating the model.</li>
+    <li>'debounce' defines the time to wait when an update event is fired until the model is actually updated.
+        If another event is caught during this time, the timer resets.</li>
+    <li>'default' is the default update event of the control - on change.
+        We set it to debounce for one second. (This is a high value, used for demonstration purpose.
+        The standard is around 250 milliseconds.)</li>
+    <li>When the input field is blurred, we would like the model to update immediately.
+        So we give debounce value 0 to the 'blur' event.</li>
+    <li>ngModelOptions affects all the nested models
+        (putting it on a form element affects all the form's input models).
+        You can override the behavior of the model in a specific element
+        simply by giving it a new ngModelOptions object.</li>
+</ul>
+
+<p>ngModelOptions docs:
+    <a href="https://docs.angularjs.org/api/ng/directive/ngModelOptions">
+    https://docs.angularjs.org/api/ng/directive/ngModelOptions</a>
+</p>
+
+<p>
+    We prevent the error messages to appear on load by giving a condition to show only when the form is dirty
+    (the user has typed in one of the form's fields):
+    <code>ng-messages="demo.myForm.$dirty && demo.myForm.$error"</code>
+</p>
+
+<p>
+    <b>We still have a problem:</b> try entering values (either a valid or invalid email),
+    changing them and submitting within a second. You will notice that the value submitted is the previous value,
+    whether it's valid (then it is shown in the alert) or not (the submit function isn't fired).
+    This is because of the debounce we have set: the new value of the model is not committed yet.
+</p>

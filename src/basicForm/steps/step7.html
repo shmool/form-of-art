@@ -1,0 +1,48 @@
+<form ng-submit="demo.myForm.$valid && demo.submit()"
+      name="demo.myForm"
+      ng-model-options="{updateOn: 'default blur', debounce: {'default': 1000, 'blur': 0}}"
+      novalidate
+      class="form-group">
+
+    <div class="form-group">
+        <label for="email">Please enter your email</label>
+        <input required type="email" ng-model="demo.email" id="email" class="form-control">
+    </div>
+
+    <button class="btn btn-success">Submit</button>
+
+</form>
+
+<label>Errors:</label>
+
+<div ng-messages="demo.myForm.$dirty && demo.myForm.$error">
+    <div ng-messages-include="basicForm/errorMessages.html"></div>
+</div>
+
+<hr>
+
+<p>input: {{ demo.email }}</p>
+
+
+<!-- Notes -->
+
+<hr>
+
+<p>
+    We use ngSubmit - the best practice for form submission, which will fix the model debounce problem.
+</p>
+
+<ul>
+    <li>ngSubmit defines the submission function</li>
+    <li>When the form is submitted, ngSubmit first forces the model update and then calls the assigned function.</li>
+    <li>If both ngSubmit and ngClick are specified, both functions will be called! See the
+        <a href="https://docs.angularjs.org/api/ng/directive/form#submitting-a-form-and-preventing-the-default-action">
+            form submission rules</a></li>
+    <li>More specifically, the first ngClick function defined within the form in a button
+        or in an input with <code>type="submit"</code> will be fired before the ngSubmit function.
+        So, how can we add buttons that do other things in the form without executing their functions on submit?<br/>
+        <a href="" ng-click="showSolution = true">Solution:</a>
+        <span ng-show="showSolution">use <code>&lt;input type="button" ng-click="..." value="Click Me!"&gt;</code></span>
+</ul>
+
+

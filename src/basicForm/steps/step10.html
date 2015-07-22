@@ -1,0 +1,69 @@
+<form ng-submit="demo.myForm.$valid && demo.submit()"
+      name="demo.myForm"
+      ng-model-options="{updateOn: 'default blur', debounce: {'default': 1000, 'blur': 0}}"
+      novalidate
+      class="form-group">
+
+    <div class="form-group">
+        <label for="email">Please enter your email</label>
+        <input name="email"
+               required
+               type="email"
+               ng-pattern="/@example.com$/"
+               ng-model="demo.email"
+               id="email"
+               class="form-control">
+    </div>
+
+    <button class="btn btn-success">Submit</button>
+
+</form>
+
+
+<div class="form-group">
+    <input type="checkbox" ng-model="demo.showMultipleMessages" id="multiple">
+    <label for="multiple">Show Multiple messages</label>
+</div>
+
+<label>Errors:</label>
+
+<div ng-messages="demo.myForm.$dirty && demo.myForm.email.$error" multiple="demo.showMultipleMessages">
+    <div ng-message="pattern">
+        The email '{{ demo.myForm.email.$viewValue }}' is not in the correct domain (example.com)
+    </div>
+    <div ng-messages-include="basicForm/errorMessages.html"></div>
+</div>
+
+<hr>
+
+<p>input: {{ demo.email }}</p>
+
+
+<!-- Notes -->
+
+<hr>
+
+<p>
+    A bit more about ngMessages...
+</p>
+
+<ul>
+    <li>We change ngMessages to inspect the email control's $error object instead of the form's.
+        This change will not be noticed since we have only one control in the form.</li>
+    <li>We add a pattern validation to the email input to match the domain @example.com:
+        <code>ng-pattern="/@example.com$/"</code></li>
+    <li>We add a custom error message. We don't want to put it in the error messages file,
+        it is added within the ng-messages element - before the messages included from the file.
+        It can be added also after the included messages - the position affects which message is displayed
+        (the first message matching an error), and if using the 'multiple' directive (see below) -
+        the order of the messages.</li>
+    <li>We use the email control's <code>$viewValue</code> in the error message.
+        Remember: the email model is undefined while the input is invalid!</li>
+    <li>We added the 'Show multiple messages' checkbox, which toggles the value of 'showMultipleMessages'.
+        This variable is used in the 'multiple' attribute we added to the ngMessages element.
+        Using 'multiple' without binding it to a value is equivalent to setting it to true.
+        (Note that when you toggle the checkbox, the change is not applied immediately on ngMessages.
+        You need to cause a different validation error to see the change.)</li>
+</ul>
+
+

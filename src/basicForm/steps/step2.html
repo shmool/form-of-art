@@ -1,0 +1,50 @@
+<form class="form-group">
+
+    <div class="form-group">
+        <label for="email">Please enter your email</label>
+        <input ng-model="demo.email" id="email" class="form-control">
+    </div>
+
+    <button ng-click="demo.submit()" class="btn btn-success">Submit</button>
+
+</form>
+
+<hr>
+
+<p>input: {{ demo.email }}</p>
+
+
+<!-- Notes -->
+
+<hr>
+
+<p>
+    We add a few elements to our form:
+</p>
+
+<ul>
+    <li>form tag (ngForm directive)</li>
+    <li>label for the input</li>
+    <li>'id' for the input and 'for' attribute in the label tag pointing to the input's id
+        (this way, clicking on the label sets focus on the input)
+    </li>
+    <li>submit button - with ng-click binded to the submit() function in the controller -
+        see basicFormController.js
+    </li>
+    <li>the controller's alias 'demo' (we're using 'controllerAs' in the routing configuration -
+        see app.js)
+    </li>
+    <li>css classes which are defined in Bootstrap
+        (we also wrap the label and the input with a div to add it a form-group class)
+    </li>
+</ul>
+
+<p>
+    We can submit the form either by clicking on the submit button or by pressing Enter
+    (since there's only one input field and one button with ngClick.
+    See the HTML specifications for submission rules in the docs).
+</p>
+
+<p>Form directive (ngForm) docs:
+    <a href="https://docs.angularjs.org/api/ng/directive/form">https://docs.angularjs.org/api/ng/directive/form</a>
+</p>

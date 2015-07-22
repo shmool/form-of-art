@@ -1,0 +1,38 @@
+<form class="form-group">
+
+    <div class="form-group">
+        <label for="email">Please enter your email</label>
+        <input required type="email" ng-model="demo.email" id="email" class="form-control">
+    </div>
+
+    <button ng-click="demo.submit()" class="btn btn-success">Submit</button>
+
+</form>
+
+<hr>
+
+<p>input: {{ demo.email }}</p>
+
+
+<!-- Notes -->
+
+<hr>
+
+<p>
+    Adding built-in validation:
+</p>
+
+<ul>
+    <li><code>required</code></li>
+    <li><code>type="email"</code></li>
+</ul>
+
+<p>
+    <b>Notice the following:</b>
+</p>
+
+<ul>
+    <li>The browser's validation takes action.</li>
+    <li>When invalid, the variable binded to the input model (demo.email) is undefined.</li>
+    <li>Submitting is always allowed - the submit() function is called whether the input is valid or not.</li>
+</ul>
