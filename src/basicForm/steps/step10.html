@@ -26,7 +26,7 @@
 
 <label>Errors:</label>
 
-<div ng-messages="demo.myForm.$dirty && demo.myForm.email.$error" multiple="demo.showMultipleMessages">
+<div ng-messages="demo.myForm.$dirty && demo.myForm.email.$error" multiple="demo.showMultipleMessages" class="text-danger">
     <div ng-message="pattern">
         The email '{{ demo.myForm.email.$viewValue }}' is not in the correct domain (example.com)
     </div>
