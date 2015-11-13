@@ -32,6 +32,12 @@ export default angular.module('formOfArt', [
         controllerProvider: ($stateParams) => $stateParams.sessionName + 'Controller',
         controllerAs: 'demo'
       })
+      .state('basicFormDemo', {
+        url: '/demo',
+        templateUrl: 'basicForm/basicFormDemo.html',
+        controller: 'basicFormController',
+        controllerAs: 'demo'
+      });
   })
   .controller('tabsController', TabsController);
 
